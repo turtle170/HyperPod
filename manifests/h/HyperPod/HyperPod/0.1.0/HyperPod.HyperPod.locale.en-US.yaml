@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.6.0.schema.json
+PackageIdentifier: HyperPod.HyperPod
+PackageVersion: 0.1.0
+PackageLocale: en-US
+Publisher: HyperPod Contributors
+PublisherUrl: https://github.com/turtle170/HyperPod
+PublisherSupportUrl: https://github.com/turtle170/HyperPod/issues
+PackageName: HyperPod
+PackageUrl: https://github.com/turtle170/HyperPod
+License: Apache-2.0
+LicenseUrl: https://github.com/turtle170/HyperPod/blob/main/LICENSE
+Copyright: Copyright 2024 HyperPod Contributors
+ShortDescription: Lightweight VMM with burstable CPU scaling for Windows (WHPX) and Linux (KVM)
+Description: |-
+  HyperPod is an open-source, lightweight virtual machine manager written in safe Rust.
+  It targets Windows-first via the Windows Hypervisor Platform (WHPX) API, with a
+  secondary backend for Linux via KVM.
+
+  Key features:
+  - Native Windows support via WinHvPlatform.dll — no QEMU, no Docker Desktop, no WSL.
+  - Burstable CPU scaling: a rayon-powered monitor watches host load and adjusts the
+    VM's CPU quota in real time (Windows: JobObject CpuRate; Linux: cgroup-v2 cpu.weight).
+  - One config file (HyperPod.toml) covers kernel, rootfs, RAM/CPU limits, and GPU policy.
+  - Storage backends: .raw / .img / .ext4 and fixed .vhd. Dynamic VHD and VHDX are
+    rejected with actionable conversion hints.
+  - GPU policy config (credits or full); enforcement is planned for 0.4.x.
+Moniker: hyperpod
+Tags:
+  - vmm
+  - hypervisor
+  - whpx
+  - kvm
+  - virtualization
+  - vm
+  - rust
+ReleaseNotes: |-
+  Initial release (0.1.0).
+  - WHPX partition + vCPU setup (Windows-primary)
+  - KVM backend (Linux-secondary)
+  - Burstable CPU scaling engine (no mocks, hard-error on unavailable probe)
+  - VirtIO-MMIO v2 transport and descriptor-chain walker (unit-tested; wiring pending interrupt injection in 0.2.0)
+  - Token-bucket I/O throttler
+  - Storage: raw, fixed-VHD; hard-error on dynamic-VHD / VHDX
+  - 29 unit tests, 0 failures
+ReleaseNotesUrl: https://github.com/turtle170/HyperPod/releases/tag/v0.1.0
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0
