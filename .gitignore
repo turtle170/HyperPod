@@ -1,0 +1,17 @@
+/target
+**/target
+**/*.rs.bk
+Cargo.lock.bak
+
+# Editor / OS noise
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local secrets / state
+*.env
+*.pem
+HyperPod.local.toml

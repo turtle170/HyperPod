@@ -1,0 +1,45 @@
+[package]
+name = "hyperpod"
+version = "0.1.0"
+edition = "2021"
+description = "Lightweight VMM with a burstable scaling engine for Windows (WHPX) and Linux (KVM)"
+license = "Apache-2.0"
+repository = "https://github.com/turtle170/HyperPod"
+homepage = "https://github.com/turtle170/HyperPod"
+readme = "../README.md"
+keywords = ["vmm", "hypervisor", "whpx", "kvm", "virtualization"]
+categories = ["virtualization", "command-line-utilities"]
+authors = ["HyperPod contributors"]
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.5", features = ["derive"] }
+crossbeam-channel = "0.5"
+rayon = "1.10"
+serde = { version = "1.0", features = ["derive"] }
+serde_derive = "1.0"
+toml = "0.8"
+
+[dev-dependencies]
+tempfile = "3.10"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_System_Hypervisor",
+    "Win32_System_JobObjects",
+    "Win32_System_Memory",
+    "Win32_System_Threading",
+] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+kvm-ioctls = "0.18"
+kvm-bindings = { version = "0.9", features = ["fam-wrappers"] }
+vmm-sys-util = "0.12"
+libc = "0.2"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

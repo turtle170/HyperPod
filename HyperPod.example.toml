@@ -1,0 +1,13 @@
+# Example HyperPod VM definition.
+# All paths must exist on the host before `hyperpod start` is invoked.
+# RAM limits are expressed in MiB; CPU limits are cgroup-style shares.
+
+rootfs_path = "/var/lib/hyperpod/rootfs.ext4"
+kernel_path = "/var/lib/hyperpod/vmlinux"
+cmdline = "console=ttyS0 reboot=k panic=1 root=/dev/vda rw"
+
+[limits]
+min_ram = 128
+max_ram = 1024
+min_cpu_shares = 256
+max_cpu_shares = 2048
